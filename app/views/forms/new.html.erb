@@ -1,0 +1,21 @@
+<h1>New Form</h1>
+
+<%= form_with model: @form do |form| %>
+  <% if @form.errors.any? %>
+    <h2>Errors:</h2>
+    <ul>
+      <% @form.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

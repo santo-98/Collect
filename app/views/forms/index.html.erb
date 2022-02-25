@@ -1,0 +1,9 @@
+<h1>Your Forms</h1>
+
+<% @forms.each do |form| %>
+  <ul>
+    <li><%= link_to form.title, form_path(id: form.id)%></li><br>
+  </ul>
+<% end %>
+
+<%= link_to "Create Form[+]", new_form_path %>
