@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_form
+  before_action :set_form, :check_if_admin
   before_action :create_question, only: [:create]
   before_action :set_question, only: [:destroy]
 
@@ -51,5 +51,11 @@ class QuestionsController < ApplicationController
         options: params[:options],
         responder_id: current_user.id
       }.compact
+    end
+
+    def check_if_admin
+      redirect_to root_path, notice: "You are not authorized to access this page" unless current_user.user_forms.find_by(
+        form_id: @form.id
+      ).admin?
     end
 end

@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: user_forms
+#
+#  id         :bigint           not null, primary key
+#  role       :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  form_id    :integer
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_user_forms_on_form_id  (form_id)
+#  index_user_forms_on_user_id  (user_id)
+#
+
+one:
+  user_id: 1
+  form_id: 1
+  role: 1
+
+two:
+  user_id: 1
+  form_id: 1
+  role: 1

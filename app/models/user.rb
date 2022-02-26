@@ -19,9 +19,13 @@
 class User < ApplicationRecord
   # Relationships
   has_many :forms
+  has_many :user_forms, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  # Accessors
+  attr_accessor :skip_password_validation
 end

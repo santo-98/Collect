@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_26_134329) do
+ActiveRecord::Schema.define(version: 2022_02_26_173118) do
 
   create_table "forms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2022_02_26_134329) do
     t.datetime "updated_at", null: false
     t.integer "responder_id"
     t.index ["responder_id"], name: "index_texts_on_responder_id"
+  end
+
+  create_table "user_forms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "form_id"
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id"], name: "index_user_forms_on_form_id"
+    t.index ["user_id"], name: "index_user_forms_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

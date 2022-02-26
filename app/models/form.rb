@@ -19,7 +19,19 @@ class Form < ApplicationRecord
   # Relationships
   belongs_to :user
   has_many :questions, dependent: :destroy
+  has_many :user_forms, dependent: :destroy
 
   # Validations
   validates :title, presence: true, length: { maximum: 250 }
+
+  # Callbacks
+  after_create :add_admin_user_form
+
+  private
+    def add_admin_user_form
+      user_form = self.user.user_forms.new(role: :admin, form_id: self.id)
+      unless user_form.save
+        self.errors[:base] << user_form.error_sentence
+      end
+    end
 end
