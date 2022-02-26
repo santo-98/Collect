@@ -19,4 +19,9 @@
 class SingleChoice < ApplicationRecord
   serialize :options, Array
   has_many :questions, as: :questionable
+
+  # Validations
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :options, presence: true
 end

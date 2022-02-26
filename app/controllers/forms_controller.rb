@@ -8,7 +8,7 @@ class FormsController < ApplicationController
     if @form.save
       redirect_to forms_path
     else
-      render 'new'
+      redirect_to new_form_path, notice: @form.error_sentence
     end
   end
 

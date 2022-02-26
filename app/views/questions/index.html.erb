@@ -1,7 +1,7 @@
 <% @questions.each do |question| %>
   <ul>
     <li><%= question.questionable.title %>
-<%= link_to "Delete", form_question_path(form_id: @form.id, id: question.id), method: :delete %></li><br>
+    <%= link_to "Delete", form_question_path(form_id: @form.id, id: question.id), method: :delete %></li><br>
   </ul>
 <% end %>
 

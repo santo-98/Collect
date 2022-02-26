@@ -17,4 +17,8 @@
 #
 class Text < ApplicationRecord
   has_many :questions, as: :questionable
+
+  # Validations
+  validates :title, presence: true
+  validates :description, presence: true
 end

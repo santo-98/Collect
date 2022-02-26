@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to form_questions_path(@form)
     else
-      render 'new'
+      redirect_to new_form_question_path(form_id: @form.id), notice: @question.error_sentence
     end
   end
 
@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
 
     def create_question
       @question = params[:question_type].constantize.new(question_params)
-      render 'new' unless @question.save
+      redirect_to new_form_question_path(form_id: @form.id), notice: @question.error_sentence unless @question.save
     end
 
     def question_params
