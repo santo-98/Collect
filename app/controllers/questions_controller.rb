@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
     if @question.destroy
       redirect_to form_questions_path(@form)
     else
-      render 'index'
+      redirect_to new_form_question_path(form_id: @form.id), notice: @question.error_sentence
     end
   end
 
