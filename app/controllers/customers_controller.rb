@@ -10,10 +10,12 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @user = User.signup_with_email(params[:email])
+    @user = User.signup_with_email(customer_params)
+    # To be refactored
     if User.exists?(@user.id)
       form = @form.user_forms.new(user_id: @user.id, role: :customer)
       if form.save
+        TwilioTextMessenger.new(edit_user_password_url(reset_token: @user.reset_password_token, @user.phone_number)).call
         redirect_to form_customers_path(@form), notice: "Invitation sent"
       else
         redirect_to form_customers_path(@form), notice: form.error_sentence
@@ -35,5 +37,12 @@ class CustomersController < ApplicationController
     def set_customer
       @customer = User.find_by(id: params[:id])
       redirect_to form_customers_path(@form), notice: "Unable to find user" unless @customer.present?
+    end
+
+    def customer_params
+      {
+        email: params[:email],
+        phone_number: params[:phone_number]
+      }.compact
     end
 end

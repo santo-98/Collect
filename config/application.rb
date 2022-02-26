@@ -22,5 +22,10 @@ module Collect
     config.action_dispatch.default_headers = {
       'X-Frame-Options' => 'ALLOWALL'
     }
+
+    config.twilio_account_sid = "ACfa979175070567ce46ce548d8331be77"
+    config.twilio_auth_token = "27bc4d07808d8a1ff2482bcd0939e7f7"
+    config.twilio_phone_number = "+19105659852"
+    config.to_twilio_number = "+91 95510 42119"
   end
 end

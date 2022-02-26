@@ -5,6 +5,7 @@
 #  id                     :bigint           not null, primary key
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
+#  phone_number           :integer
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
@@ -29,6 +30,9 @@ class User < ApplicationRecord
   # Accessors
   attr_accessor :skip_password_validation
 
+  #  Callbacks
+  after_update :update_verified, if: :encrypted_password_changed?
+
   def self.signup_with_email(email)
     user = User.new(email: email)
     user.skip_password_validation = true
@@ -42,5 +46,9 @@ class User < ApplicationRecord
     def password_required?
       return false if skip_password_validation
       super
+    end
+
+    def update_verified
+      self.user_forms.update_all(verified: true)
     end
 end
