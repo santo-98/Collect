@@ -1,0 +1,27 @@
+<%= form_with(url: form_questions_path(form_id: @form.id), method: "post")do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.check_box :mandatory_question %>
+    <%= form.label :mandatory_question %>
+  </div>
+
+  <div>
+    <%= form.label :options %><br>
+    <%= form.text_field :options %>
+  </div>
+
+  <%= hidden_field_tag :question_type, "SingleChoice" %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

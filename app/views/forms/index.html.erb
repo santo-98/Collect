@@ -2,7 +2,7 @@
 
 <% @forms.each do |form| %>
   <ul>
-    <li><%= link_to form.title, form_path(id: form.id)%></li><br>
+    <li><%= link_to form.title, form_questions_path(form_id: form.id)%></li><br>
   </ul>
 <% end %>
 
