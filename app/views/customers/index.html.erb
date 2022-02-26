@@ -1,0 +1,8 @@
+<h1>Customers</h1>
+
+<% @customers.each do |customer| %>
+  <%= customer.user.email %>
+  <%= link_to "Delete", form_customer_path(form_id: @form.id, id: customer.user.id), method: :delete %></li><br>
+<% end %>
+
+<%= link_to "Add Customer[+]", new_form_customer_path %>

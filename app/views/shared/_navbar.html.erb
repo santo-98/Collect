@@ -11,6 +11,11 @@
             <%= link_to "Questions", form_questions_path(form_id: @form.id), class: "nav-link" %>
           </li>
         <% end %>
+        <% if @form.present? %>
+          <li class="nav-item">
+            <%= link_to "Customers", form_customers_path(form_id: @form.id), class: "nav-link" %>
+          </li>
+        <% end %>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"%>

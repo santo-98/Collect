@@ -8,4 +8,14 @@ class ApplicationController < ActionController::Base
       @current_user = current_user
     end
   end
+
+  def set_form
+    @form = current_user.forms.find_by(id: params[:form_id])
+  end
+
+  def check_if_admin
+    redirect_to root_path, notice: "You are not authorized to access this page" unless current_user.user_forms.find_by(
+      form_id: @form.id
+    ).admin?
+  end
 end

@@ -28,4 +28,19 @@ class User < ApplicationRecord
 
   # Accessors
   attr_accessor :skip_password_validation
+
+  def self.signup_with_email(email)
+    user = User.new(email: email)
+    user.skip_password_validation = true
+    user.reset_password_sent_at = DateTime.now
+    user.reset_password_token = Devise.friendly_token
+    user.save
+    user
+  end
+
+  protected
+    def password_required?
+      return false if skip_password_validation
+      super
+    end
 end

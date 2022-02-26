@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "forms#index"
 
   resources :forms, only: [:index, :create, :new] do
+    resources :customers, only: [:index, :create, :new, :destroy]
     resources :questions, only: [:index, :create, :new, :destroy]
   end
 end

@@ -30,10 +30,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def set_form
-      @form = current_user.forms.find_by(id: params[:form_id])
-    end
-
     def set_question
       @question = @form.questions.find_by(id: params[:id])
     end
@@ -51,11 +47,5 @@ class QuestionsController < ApplicationController
         options: params[:options],
         responder_id: current_user.id
       }.compact
-    end
-
-    def check_if_admin
-      redirect_to root_path, notice: "You are not authorized to access this page" unless current_user.user_forms.find_by(
-        form_id: @form.id
-      ).admin?
     end
 end
