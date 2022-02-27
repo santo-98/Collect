@@ -16,6 +16,5 @@ class SingleChoice < ApplicationRecord
 
   # Validations
   validates :title, presence: true
-  validates :description, presence: true
   validates :options, presence: true
 end

@@ -13,3 +13,12 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+function addTextInputHandler() {
+  const TextInputArea = document.getElementById('text-input');
+  const textInputEl = document.createElement("input");
+  textInputEl.setAttribute("type", "text");
+  textInputEl.setAttribute("name", "options[]");
+
+  TextInputArea.appendChild(textInputEl)
+}
