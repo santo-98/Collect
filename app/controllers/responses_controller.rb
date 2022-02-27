@@ -18,8 +18,8 @@ class ResponsesController < ApplicationController
       question = @form.questions.find_by(questionable_type: value[:questionable_type], questionable_id: value[:questionable_id])
       response = @form.responses.new(responsable: question.questionable, responder_id: current_user.id, response: value[:response])
       response.save
+      send_responses
     end
-    send_responses
     redirect_to root_path, notice: "Thank you for your response"
   end
 
@@ -30,10 +30,6 @@ class ResponsesController < ApplicationController
 
     # Should be moved to sidekiq there is time
     def send_responses
-      message = "Your response from #{@form.name} form\n"
-      @form.responses.where(responder_id: current_user.id).each do |response|
-        message = message + "#{response.responsable.title} : #{response.response}\n"
-      end
-      TwilioTextMessenger.new(edit_user_password_url(reset_token: @user.reset_password_token), @user.phone_number).call
+      SmsWorker.perform_async(@form)
     end
 end
