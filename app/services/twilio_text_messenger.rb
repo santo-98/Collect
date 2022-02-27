@@ -3,11 +3,11 @@ class TwilioTextMessenger
 
   INVITATION_MESSAGE = "You have been to fill out the form"
 
-  def initialize(invite_link, form=nil, phone_number=nil)
+  def initialize(invite_link=nil, form=nil, phone_number=nil, message=nil)
     @invite_link = invite_link
     @form = form
     @phone_number = phone_number
-    @message = "#{INVITATION_MESSAGE} #{@invite_link}"
+    @message = message.present? ? message : "#{INVITATION_MESSAGE} #{@invite_link}"
   end
 
   # Since SMS to be sent should be verified by twilio, passing default value

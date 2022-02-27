@@ -14,11 +14,21 @@ class ResponsesController < ApplicationController
       response = @form.responses.new(responsable: question.questionable, responder_id: current_user.id, response: value[:response])
       response.save
     end
+    send_responses
     redirect_to root_path, notice: "Thank you for your response"
   end
 
   private
     def check_user_already_responded
       redirect_to root_path, notice: "Form has been already submitted" if current_user.responses.where(form_id: @form.id).any?
+    end
+
+    # Should be moved to sidekiq there is time
+    def send_responses
+      message = "Your response from #{@form.name} form\n"
+      @form.responses.where(responder_id: current_user.id).each do |response|
+        message = message + "#{response.responsable.title} : #{response.response}\n"
+      end
+      TwilioTextMessenger.new(edit_user_password_url(reset_token: @user.reset_password_token), @user.phone_number).call
     end
 end
