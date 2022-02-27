@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:destroy]
 
   def index
-    @customers = @form.user_forms.where(role: :customer)
+    @customers = @form.user_forms.where(role: :customer, verified: true)
   end
 
   def new
@@ -15,7 +15,7 @@ class CustomersController < ApplicationController
     if User.exists?(@user.id)
       form = @form.user_forms.new(user_id: @user.id, role: :customer)
       if form.save
-        TwilioTextMessenger.new(edit_user_password_url(reset_token: @user.reset_password_token, @user.phone_number)).call
+        TwilioTextMessenger.new(edit_user_password_url(reset_token: @user.reset_password_token), @user.phone_number).call
         redirect_to form_customers_path(@form), notice: "Invitation sent"
       else
         redirect_to form_customers_path(@form), notice: form.error_sentence

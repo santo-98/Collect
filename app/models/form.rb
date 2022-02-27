@@ -20,6 +20,7 @@ class Form < ApplicationRecord
   belongs_to :user
   has_many :questions, dependent: :destroy
   has_many :user_forms, dependent: :destroy
+  has_many :responses, dependent: :destroy
 
   # Validations
   validates :title, presence: true, length: { maximum: 250 }
