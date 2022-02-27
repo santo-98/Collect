@@ -13,8 +13,11 @@
           <li class="nav-item">
             <%= link_to "Customers", form_customers_path(form_id: @form.id), class: "nav-link" %>
           </li>
-           <li class="nav-item">
+          <li class="nav-item">
             <%= link_to "Preview Form", form_path(id: @form.id), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "View Responses", form_responses_path(id: @form.id), class: "nav-link" %>
           </li>
         <% end %>
         <% if user_signed_in? %>
