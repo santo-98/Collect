@@ -1,7 +1,7 @@
 
 <table>
   <tr>
-    <% @response_headers.each do |header| %>
+    <% @response_headers.append("email").each do |header| %>
       <th><%= header %></th>
     <% end %>
   </tr>
@@ -10,6 +10,7 @@
       <% response.each do |r| %>
         <td><%= r.response %></td>
       <% end %>
+      <td><%= response.last.responder.email %></td>
     </tr>
   <% end %>
 </table>

@@ -26,4 +26,18 @@ class Response < ApplicationRecord
   validates :response, presence: true
   validates_uniqueness_of :responder_id, scope: :form_id
 
+  def self.to_csv(responses, headers)
+    CSV.generate(headers: true) do |csv|
+      csv << headers
+
+      responses.values.each do |response|
+        temp_array = []
+        response.each do |r|
+          temp_array.append(r.response)
+        end
+        csv << temp_array.append(response.first.responder.email)
+      end
+
+    end
+  end
 end

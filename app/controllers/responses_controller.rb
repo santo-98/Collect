@@ -6,6 +6,11 @@ class ResponsesController < ApplicationController
   def index
     @responses = @form.responses.includes(:responsable).group_by(&:responder_id)
     @response_headers = @form.questions.map { |question| question.questionable.title }
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @form.responses.to_csv(@responses, @response_headers) }
+    end
   end
 
   def create
