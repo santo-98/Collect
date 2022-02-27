@@ -21,6 +21,7 @@ class User < ApplicationRecord
   # Relationships
   has_many :forms
   has_many :user_forms, dependent: :destroy
+  has_many :responses, foreign_key: :responder_id ,dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

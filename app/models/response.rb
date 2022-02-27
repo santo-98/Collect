@@ -21,4 +21,9 @@ class Response < ApplicationRecord
   belongs_to :form
   belongs_to :responder, class_name: "User"
   belongs_to :question
+
+  # Validations
+  validates :response, presence: true
+  validates_uniqueness_of :responder_id, scope: :form_id
+
 end
