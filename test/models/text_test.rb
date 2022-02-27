@@ -2,18 +2,12 @@
 #
 # Table name: texts
 #
-#  id           :bigint           not null, primary key
-#  description  :string(255)
-#  mandatory    :boolean
-#  response     :string(255)
-#  title        :string(255)
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  responder_id :integer
-#
-# Indexes
-#
-#  index_texts_on_responder_id  (responder_id)
+#  id          :bigint           not null, primary key
+#  description :string(255)
+#  mandatory   :boolean
+#  title       :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 require 'test_helper'
 

@@ -44,8 +44,7 @@ class QuestionsController < ApplicationController
         title: params[:title],
         description: params[:description],
         mandatory: params[:mandatory_question],
-        options: params[:options],
-        responder_id: current_user.id
+        options: params[:options]
       }.compact
     end
 end

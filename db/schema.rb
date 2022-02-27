@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_27_045942) do
+ActiveRecord::Schema.define(version: 2022_02_27_115408) do
 
   create_table "forms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2022_02_27_045942) do
     t.integer "responsable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "responder_id"
+    t.text "response"
     t.index ["form_id"], name: "index_responses_on_form_id"
   end
 
@@ -45,23 +47,17 @@ ActiveRecord::Schema.define(version: 2022_02_27_045942) do
     t.string "title"
     t.string "description"
     t.boolean "mandatory"
-    t.string "response"
     t.text "options"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "responder_id"
-    t.index ["responder_id"], name: "index_single_choices_on_responder_id"
   end
 
   create_table "texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.boolean "mandatory"
-    t.string "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "responder_id"
-    t.index ["responder_id"], name: "index_texts_on_responder_id"
   end
 
   create_table "user_forms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

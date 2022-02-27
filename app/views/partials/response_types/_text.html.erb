@@ -1,0 +1,10 @@
+
+<div>
+  <br><%= form.label question.title %><br>
+  <% if question.description.present? %>
+    <div>
+      <%= "Description: #{question.description}" %><br>
+    </div>
+  <% end %>
+  <%= form.text_field "question[#{question.id}][response]", required: question.mandatory %>
+</div>

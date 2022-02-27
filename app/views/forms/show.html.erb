@@ -1,0 +1,14 @@
+<%= form_with(url: form_responses_path(form_id: @form.id), method: "post")do |form| %>
+  <% @questions.each do |question| %>
+    <%= render partial: "partials/response_types/#{question.questionable_type.underscore}", locals: {
+      question: question.questionable,
+      form: form
+    } %>
+    <%= hidden_field_tag "question[#{question.questionable.id}][questionable_type]", question.questionable_type %>
+    <%= hidden_field_tag "question[#{question.questionable.id}][questionable_id]", question.id %>
+  <% end %>
+
+    <div>
+      <%= form.submit %>
+    </div>
+<% end %>

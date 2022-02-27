@@ -1,6 +1,12 @@
 class FormsController < ApplicationController
+  before_action :set_form, :check_user_form, only: [:show]
+
   def index
     @forms = current_user.forms
+  end
+
+  def show
+    @questions = @form.questions
   end
 
   def create

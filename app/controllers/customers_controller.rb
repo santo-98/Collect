@@ -3,6 +3,7 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:destroy]
 
   def index
+    binding.pry
     @customers = @form.user_forms.where(role: :customer, verified: true)
   end
 

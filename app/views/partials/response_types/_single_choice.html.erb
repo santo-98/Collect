@@ -1,0 +1,19 @@
+<%= form_with(url: form_responses_path(form_id: @form.id), method: "post")do |form| %>
+  <div>
+    <%= form.label question.title %><br>
+    <% if question.description.present? %>
+      <div>
+        <%= "Description: #{question.description}" %><br>
+      </div>
+      <%= question.options.each do |option| %>
+        <%= form.radio_button :response, option %><%= option %><br>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= hidden_field_tag :question_type, "SingleChoice" %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

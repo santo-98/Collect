@@ -33,12 +33,16 @@ class User < ApplicationRecord
   #  Callbacks
   after_update :update_verified, if: :encrypted_password_changed?
 
-  def self.signup_with_email(email)
-    user = User.new(email: email)
-    user.skip_password_validation = true
-    user.reset_password_sent_at = DateTime.now
-    user.reset_password_token = Devise.friendly_token
-    user.save
+  def self.signup_with_email(params)
+    user = User.find_by(email: params[:email])
+    unless user.present?
+      user = User.new(email: params[:email])
+      user.skip_password_validation = true
+      user.reset_password_sent_at = DateTime.now
+      user.reset_password_token = Devise.friendly_token
+      user.phone_number = params[:phone_number]
+      user.save
+    end
     user
   end
 
