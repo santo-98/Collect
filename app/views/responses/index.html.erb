@@ -5,4 +5,11 @@
       <th><%= header %></th>
     <% end %>
   </tr>
+  <% @responses.values.each do |response| %>
+    <tr>
+      <% response.each do |r| %>
+        <td><%= r.response %></td>
+      <% end %>
+    </tr>
+  <% end %>
 </table>

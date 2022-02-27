@@ -20,4 +20,5 @@ class Response < ApplicationRecord
   belongs_to :responsable, polymorphic: true, dependent: :destroy
   belongs_to :form
   belongs_to :responder, class_name: "User"
+  belongs_to :question
 end

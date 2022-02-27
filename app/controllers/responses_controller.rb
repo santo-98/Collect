@@ -4,7 +4,7 @@ class ResponsesController < ApplicationController
   before_action :check_user_form, only: [:create]
 
   def index
-    @responses = @form.questions.includes(:questionable)
+    @responses = @form.responses.includes(:responsable).group_by(&:responder_id)
     @response_headers = @form.questions.map { |question| question.questionable.title }
   end
 
